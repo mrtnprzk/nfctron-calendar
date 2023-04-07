@@ -1,10 +1,6 @@
-import moment from 'moment'
-import { Calendar, momentLocalizer } from 'react-big-calendar'
-
-import 'react-big-calendar/lib/css/react-big-calendar.css'
+import BigCalendar from '@/components/BigCalendar/BigCalendar'
 
 export default function Home() {
-    const localizer = momentLocalizer(moment)
     const events = [
         {
             title: 'My Event',
@@ -23,13 +19,5 @@ export default function Home() {
         },
     ]
 
-    return (
-        <Calendar
-            localizer={localizer}
-            events={events}
-            startAccessor="start"
-            endAccessor="end"
-            style={{ height: '100vh' }}
-        />
-    )
+    return <BigCalendar events={events} />
 }
