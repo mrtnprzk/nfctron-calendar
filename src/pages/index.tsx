@@ -1,5 +1,3 @@
 export default function Home() {
-  return (
-    <div className="text-red-500">Hello NFCtron!</div>
-  )
+    return <div className="text-red-500">Hello NFCtron!</div>
 }
