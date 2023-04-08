@@ -4,8 +4,8 @@ import { FC } from 'react'
 
 const Header: FC = ({}) => {
     return (
-        <header className="bg-nfcPurple shadow-xl p-2">
-            <div className="container flex justify-between items-center mx-auto">
+        <header className="bg-nfcPurpleDark shadow-xl p-2">
+            <div className="flex justify-between items-center max-w-screen-2xl mx-auto">
                 <Link href={'https://www.nfctron.com/'}>
                     <Image
                         src="/nfctron-logo.svg"

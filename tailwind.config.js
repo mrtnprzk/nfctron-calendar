@@ -4,7 +4,9 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                nfcPurple: '#25196B',
+                nfcPurpleDark: '#25196A',
+                nfcPurple: '#7F46DB',
+                nfcPurpleLight: '#D3E5F4',
                 nfcCyan: '#03D5DE',
             },
         },
