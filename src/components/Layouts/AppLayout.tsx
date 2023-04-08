@@ -1,5 +1,6 @@
-import Header from '@/components/Header/Header'
 import { FC, ReactNode } from 'react'
+
+import Header from '@/components/Header/Header'
 
 interface AppLayoutProps {
     children: ReactNode
