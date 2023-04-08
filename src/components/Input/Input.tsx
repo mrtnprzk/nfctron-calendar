@@ -4,9 +4,11 @@ interface InputProps {
     name: string
     placeholder: string
     type?: HTMLInputTypeAttribute
+    value: any
+    onChange: any
 }
 
-const Input: FC<InputProps> = ({ name, placeholder, type = 'text' }) => {
+const Input: FC<InputProps> = ({ name, placeholder, type = 'text', value, onChange }) => {
     return (
         <>
             <label htmlFor={name} className="sr-only">
@@ -19,6 +21,8 @@ const Input: FC<InputProps> = ({ name, placeholder, type = 'text' }) => {
                 required
                 className="w-full outline-none rounded-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-nfcPurple duration-500"
                 placeholder={placeholder}
+                value={value}
+                onChange={onChange}
             />
         </>
     )
