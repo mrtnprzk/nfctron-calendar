@@ -18,6 +18,11 @@ export default function Home() {
     }
 
     const addEventHandler = (title: string, startDate: string, endDate: string) => {
+        const sameTitle = !!events.find((event) => event.title === title)
+
+        //TODO: add error message it cannot have same title
+        if (sameTitle) return
+
         const start = new Date(startDate)
         const end = new Date(endDate)
 
@@ -25,10 +30,25 @@ export default function Home() {
         setOpenAdd(false)
     }
 
-    //Logic to modify existing event
+    //Logic to modify or delete existing event
     const handleSelectEvent = (event: Event) => {
         setSelectedEvent(event)
         setOpenModify(true)
+    }
+
+    const modifyEventHandler = (title: string, startDate: string, endDate: string) => {
+        const start = new Date(startDate)
+        const end = new Date(endDate)
+
+        const filteredEvents = events.filter((event) => event.title !== selectedEvent?.title)
+        setEvents([...filteredEvents, { title, start, end }])
+        setOpenModify(false)
+    }
+
+    const deleteEventHandler = () => {
+        const filteredEvents = events.filter((event) => event.title !== selectedEvent?.title)
+        setEvents([...filteredEvents])
+        setOpenModify(false)
     }
 
     return (
@@ -40,7 +60,13 @@ export default function Home() {
                 selectedEvent={selectedEvent}
                 addEventHandler={addEventHandler}
             />
-            <FormModify openModify={openModify} setOpenModify={setOpenModify} selectedEvent={selectedEvent} />
+            <FormModify
+                openModify={openModify}
+                setOpenModify={setOpenModify}
+                selectedEvent={selectedEvent}
+                modifyEventHandler={modifyEventHandler}
+                deleteEventHandler={deleteEventHandler}
+            />
         </>
     )
 }
