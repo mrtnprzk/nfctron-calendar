@@ -57,7 +57,7 @@ const BigCalendar: FC<BigCalendarProps> = ({ events, handleSelectSlot, handleSel
             events={events}
             startAccessor="start"
             endAccessor="end"
-            style={{ height: '90vh', padding: '0.5rem' }}
+            style={{ height: '85vh', padding: '0.5rem' }}
             className="bg-white shadow-xl rounded-md"
             onSelectEvent={handleSelectEvent}
             onSelectSlot={handleSelectSlot}
@@ -65,6 +65,7 @@ const BigCalendar: FC<BigCalendarProps> = ({ events, handleSelectSlot, handleSel
             views={['month', 'week', 'day']}
             eventPropGetter={eventStyleGetter}
             dayPropGetter={todayStyleGetter as DayPropGetter}
+            longPressThreshold={10}
         />
     )
 }
