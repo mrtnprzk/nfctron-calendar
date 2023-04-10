@@ -23,8 +23,8 @@ const Modal: FC<ModalProps> = ({ children, open, setOpen }) => {
                     <div className="fixed inset-0 bg-gray-700 bg-opacity-75 transition-opacity" />
                 </Transition.Child>
 
-                <div className="fixed inset-0 z-10 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-2 text-center sm:items-center sm:p-0">
+                <div className="fixed inset-0 z-10 overflow-y-auto rounded-lg">
+                    <div className="flex min-h-full items-start justify-center p-2 mt-[10%] text-center sm:p-0">
                         <Transition.Child
                             as={Fragment}
                             enter="ease-out duration-300"
@@ -34,7 +34,7 @@ const Modal: FC<ModalProps> = ({ children, open, setOpen }) => {
                             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                         >
-                            <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 w-full max-w-sm md:max-w-lg">
+                            <Dialog.Panel className="relative transform bg-white text-left shadow-xl transition-all sm:my-8 w-full max-w-sm md:max-w-lg">
                                 {children}
                             </Dialog.Panel>
                         </Transition.Child>

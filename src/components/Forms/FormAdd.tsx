@@ -1,6 +1,7 @@
 import moment from 'moment'
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
 import { type Event } from 'react-big-calendar'
+import { DateRangeType } from 'react-tailwindcss-datepicker/dist/types'
 
 import Button from '@/components/Button/Button'
 import Input from '@/components/Input/Input'
@@ -10,20 +11,24 @@ interface FormAddProps {
     openAdd: boolean
     setOpenAdd: Dispatch<SetStateAction<boolean>>
     selectedEvent: Event | null
-    addEventHandler: (title: string, start: string, end: string) => void
+    addEventHandler: (title: string, date: DateRangeType) => void
 }
 
 const FormAdd: FC<FormAddProps> = ({ openAdd, setOpenAdd, selectedEvent, addEventHandler }) => {
     const [title, setTitle] = useState('')
-    const [start, setStart] = useState('')
-    const [end, setEnd] = useState('')
+    const [date, setDate] = useState({
+        startDate: '',
+        endDate: '',
+    })
 
     useEffect(() => {
-        const startDate = moment(selectedEvent?.start).format('YYYY-MM-DD')
+        const start = moment(selectedEvent?.start).format('YYYY-MM-DD')
 
         setTitle('')
-        setStart(startDate)
-        setEnd(startDate)
+        setDate({
+            startDate: start,
+            endDate: start,
+        })
     }, [openAdd])
 
     return (
@@ -31,7 +36,7 @@ const FormAdd: FC<FormAddProps> = ({ openAdd, setOpenAdd, selectedEvent, addEven
             <form
                 onSubmit={(e) => {
                     e.preventDefault()
-                    addEventHandler(title, start, end)
+                    addEventHandler(title, date)
                 }}
             >
                 <div className="bg-nfcPurpleLight p-3 md:p-6">
@@ -44,18 +49,11 @@ const FormAdd: FC<FormAddProps> = ({ openAdd, setOpenAdd, selectedEvent, addEven
                             onChange={(e: any) => setTitle(e.target.value)}
                         />
                         <Input
-                            placeholder="Start time"
+                            placeholder="Pick Date"
                             name="start-date"
                             type="date"
-                            value={start}
-                            onChange={(e: any) => setStart(e.target.value)}
-                        />
-                        <Input
-                            placeholder="End time"
-                            name="end-date"
-                            type="date"
-                            value={end}
-                            onChange={(e: any) => setEnd(e.target.value)}
+                            value={date}
+                            onChange={(newDate: any) => setDate(newDate)}
                         />
                     </div>
                 </div>

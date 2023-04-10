@@ -17,14 +17,14 @@ export default function Home() {
         setOpenAdd(true)
     }
 
-    const addEventHandler = (title: string, startDate: string, endDate: string) => {
+    const addEventHandler = (title: string, date: any) => {
         const sameTitle = !!events.find((event) => event.title === title)
 
         //TODO: add error message it cannot have same title
         if (sameTitle) return
 
-        const start = new Date(startDate)
-        const end = new Date(endDate)
+        const start = new Date(date.startDate)
+        const end = new Date(date.endDate)
 
         setEvents((prevEvents: Event[]) => [...prevEvents, { title, start, end }])
         setOpenAdd(false)
@@ -36,9 +36,9 @@ export default function Home() {
         setOpenModify(true)
     }
 
-    const modifyEventHandler = (title: string, startDate: string, endDate: string) => {
-        const start = new Date(startDate)
-        const end = new Date(endDate)
+    const modifyEventHandler = (title: string, date: any) => {
+        const start = new Date(date.startDate)
+        const end = new Date(date.endDate)
 
         const filteredEvents = events.filter((event) => event.title !== selectedEvent?.title)
         setEvents([...filteredEvents, { title, start, end }])
