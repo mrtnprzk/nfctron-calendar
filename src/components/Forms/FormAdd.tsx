@@ -1,7 +1,7 @@
 import moment from 'moment'
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import { useEffect, useState, type ChangeEvent, type Dispatch, type FC, type SetStateAction } from 'react'
 import { type Event } from 'react-big-calendar'
-import { DateRangeType } from 'react-tailwindcss-datepicker/dist/types'
+import { DateValueType } from 'react-tailwindcss-datepicker/dist/types'
 
 import Button from '@/components/Button/Button'
 import Input from '@/components/Input/Input'
@@ -11,12 +11,12 @@ interface FormAddProps {
     openAdd: boolean
     setOpenAdd: Dispatch<SetStateAction<boolean>>
     selectedEvent: Event | null
-    addEventHandler: (title: string, date: DateRangeType) => void
+    addEventHandler: (title: string, date: DateValueType) => void
 }
 
 const FormAdd: FC<FormAddProps> = ({ openAdd, setOpenAdd, selectedEvent, addEventHandler }) => {
-    const [title, setTitle] = useState('')
-    const [date, setDate] = useState({
+    const [title, setTitle] = useState<string>('')
+    const [date, setDate] = useState<DateValueType>({
         startDate: '',
         endDate: '',
     })
@@ -46,14 +46,14 @@ const FormAdd: FC<FormAddProps> = ({ openAdd, setOpenAdd, selectedEvent, addEven
                             placeholder="Title"
                             name="title"
                             value={title}
-                            onChange={(e: any) => setTitle(e.target.value)}
+                            onChange={(e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
                         />
                         <Input
                             placeholder="Pick Date"
                             name="start-date"
                             type="date"
                             value={date}
-                            onChange={(newDate: any) => setDate(newDate)}
+                            onChange={(value: DateValueType) => setDate(value)}
                         />
                     </div>
                 </div>

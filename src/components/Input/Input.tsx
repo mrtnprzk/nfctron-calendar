@@ -1,14 +1,18 @@
+import { type ChangeEvent, type FC, type HTMLInputTypeAttribute } from 'react'
+import Datepicker from 'react-tailwindcss-datepicker'
+
 import { cx } from '@/lib/classnames'
 import { yesterday } from '@/lib/dates'
-import { FC, HTMLInputTypeAttribute } from 'react'
-import Datepicker from 'react-tailwindcss-datepicker'
+import { DateValueType } from 'react-tailwindcss-datepicker/dist/types'
 
 interface InputProps {
     name: string
     placeholder: string
     type?: HTMLInputTypeAttribute
-    value: any
-    onChange: any
+    value: string | DateValueType
+    onChange:
+        | ((e: ChangeEvent<HTMLInputElement>) => void)
+        | ((value: DateValueType, e?: HTMLInputElement | null | undefined) => void)
 }
 
 const Input: FC<InputProps> = ({ name, placeholder, type = 'text', value, onChange }) => {
@@ -24,8 +28,8 @@ const Input: FC<InputProps> = ({ name, placeholder, type = 'text', value, onChan
                 <Datepicker
                     inputId={name}
                     inputName={name}
-                    value={value}
-                    onChange={onChange}
+                    value={value as DateValueType}
+                    onChange={onChange as (value: DateValueType, e?: HTMLInputElement | null | undefined) => void}
                     useRange={false}
                     placeholder={placeholder}
                     displayFormat={'DD/MM/YYYY'}
@@ -43,8 +47,8 @@ const Input: FC<InputProps> = ({ name, placeholder, type = 'text', value, onChan
                     required
                     className={cx(inputClassName)}
                     placeholder={placeholder}
-                    value={value}
-                    onChange={onChange}
+                    value={value as string}
+                    onChange={onChange as (e: ChangeEvent<HTMLInputElement>) => void}
                 />
             )}
         </>

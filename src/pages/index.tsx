@@ -6,6 +6,7 @@ import BigCalendar from '@/components/BigCalendar/BigCalendar'
 import FormAdd from '@/components/Forms/FormAdd'
 import FormModify from '@/components/Forms/FormModify'
 import { yesterday } from '@/lib/dates'
+import { DateValueType } from 'react-tailwindcss-datepicker/dist/types'
 
 export default function Home() {
     const [events, setEvents] = useState<Event[]>([])
@@ -21,13 +22,13 @@ export default function Home() {
         setOpenAdd(true)
     }
 
-    const addEventHandler = (title: string, date: any) => {
+    const addEventHandler = (title: string, date: DateValueType) => {
         const sameTitle = !!events.find((event) => event.title === title)
 
         if (sameTitle) return toast.error('You cannot have two same titles of event.')
 
-        const start = new Date(date.startDate)
-        const end = new Date(date.endDate)
+        const start = new Date(date?.startDate!)
+        const end = new Date(date?.endDate!)
 
         setEvents((prevEvents: Event[]) => [...prevEvents, { title, start, end }])
         setOpenAdd(false)
@@ -41,12 +42,12 @@ export default function Home() {
         setOpenModify(true)
     }
 
-    const modifyEventHandler = (title: string, date: any) => {
+    const modifyEventHandler = (title: string, date: DateValueType) => {
         const sameTitle = !!events.find((event) => event.title === title)
         if (sameTitle) return toast.error('You cannot have two same titles of event.')
 
-        const start = new Date(date.startDate)
-        const end = new Date(date.endDate)
+        const start = new Date(date?.startDate!)
+        const end = new Date(date?.endDate!)
 
         const filteredEvents = events.filter((event) => event.title !== selectedEvent?.title)
         setEvents([...filteredEvents, { title, start, end }])
