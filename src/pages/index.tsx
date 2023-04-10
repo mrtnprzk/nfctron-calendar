@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { type Event } from 'react-big-calendar'
+import { toast } from 'react-hot-toast'
 
 import BigCalendar from '@/components/BigCalendar/BigCalendar'
 import FormAdd from '@/components/Forms/FormAdd'
 import FormModify from '@/components/Forms/FormModify'
+import { yesterday } from '@/lib/dates'
 
 export default function Home() {
     const [events, setEvents] = useState<Event[]>([])
@@ -13,6 +15,8 @@ export default function Home() {
 
     //Logic to add new event
     const handleSelectSlot = (event: Event) => {
+        if (event.start! < yesterday) return toast.error('You cannot add events older than today.')
+
         setSelectedEvent(event)
         setOpenAdd(true)
     }
@@ -20,14 +24,15 @@ export default function Home() {
     const addEventHandler = (title: string, date: any) => {
         const sameTitle = !!events.find((event) => event.title === title)
 
-        //TODO: add error message it cannot have same title
-        if (sameTitle) return
+        if (sameTitle) return toast.error('You cannot have two same titles of event.')
 
         const start = new Date(date.startDate)
         const end = new Date(date.endDate)
 
         setEvents((prevEvents: Event[]) => [...prevEvents, { title, start, end }])
         setOpenAdd(false)
+
+        toast.success('Event successfully added!')
     }
 
     //Logic to modify or delete existing event
@@ -37,18 +42,25 @@ export default function Home() {
     }
 
     const modifyEventHandler = (title: string, date: any) => {
+        const sameTitle = !!events.find((event) => event.title === title)
+        if (sameTitle) return toast.error('You cannot have two same titles of event.')
+
         const start = new Date(date.startDate)
         const end = new Date(date.endDate)
 
         const filteredEvents = events.filter((event) => event.title !== selectedEvent?.title)
         setEvents([...filteredEvents, { title, start, end }])
         setOpenModify(false)
+
+        toast.success('Event successfully modified!')
     }
 
     const deleteEventHandler = () => {
         const filteredEvents = events.filter((event) => event.title !== selectedEvent?.title)
         setEvents([...filteredEvents])
         setOpenModify(false)
+
+        toast.success('Event successfully deleted!')
     }
 
     return (
