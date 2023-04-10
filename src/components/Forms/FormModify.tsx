@@ -75,7 +75,9 @@ const FormModify: FC<FormModifyProps> = ({
                     <Button variant="delete" onClick={deleteEventHandler}>
                         Delete
                     </Button>
-                    <Button variant="cancel">Cancel</Button>
+                    <Button variant="cancel" onClick={() => setOpenModify(false)}>
+                        Cancel
+                    </Button>
                 </div>
             </form>
         </Modal>
