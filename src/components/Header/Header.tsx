@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
-const Header: FC = ({}) => {
+const Header: FC = () => {
     return (
         <header className="bg-nfcPurpleDark shadow-xl p-2">
             <div className="flex justify-between items-center max-w-screen-2xl mx-auto">

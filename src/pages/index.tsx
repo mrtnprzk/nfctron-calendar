@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { type Event } from 'react-big-calendar'
 import { toast } from 'react-hot-toast'
+import { DateValueType } from 'react-tailwindcss-datepicker/dist/types'
 
 import BigCalendar from '@/components/BigCalendar/BigCalendar'
 import FormEvent from '@/components/Forms/FormEvent'
 import { FORM_TYPE } from '@/components/Forms/constants'
 import { yesterday } from '@/lib/dates'
-import { DateValueType } from 'react-tailwindcss-datepicker/dist/types'
 
 export default function Home() {
     const [events, setEvents] = useState<Event[]>([])
